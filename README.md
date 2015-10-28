@@ -23,7 +23,7 @@ To refresh your local repository type:
 
 >git pull https://github.com/Polandr/algo_repo
 
-Despite all of these command you can use comfortable GUI of GitHub.
+Despite all of these commands you can use comfortable GUI of GitHub.
 
 To get some extra information read:
 * man git

@@ -1,0 +1,12 @@
+program Начальный слот
+better Какая задача решается
+encoding Тип кодирования
+algorithm Тип алгоритма
+selectpopulation Схема отбора
+select Оператор отбора
+crossoverpopulation Схема скрещивания
+crossover Оператор скрещивания
+mutatepopulation Схема мутации
+mutate Оператор мутации
+getalphabeta Выбор параметров обновление скорости
+printpopulation Печать популяции

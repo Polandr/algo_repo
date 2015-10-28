@@ -3,19 +3,19 @@
 
 To clone repository to your local machine type:
 
->git clone https://github.com/Polandr/algo_repo #<filename#>
+>git clone https://github.com/Polandr/algo_repo \<filename\>
 
-where <filename> is the file where to clone repository
+where \<filename\> is the file where to clone repository
 
 To save your local changes in remote repository type:
 
->git add <file to change>
+>git add \<file to change\>
 
 >...
 
->git add <another file to change>
+>git add \<another file to change\>
 
->git commit -m 'commit message example'
+>git commit -m \'commit message example\'
 
 >git push https://github.com/Polandr/algo_repo
 

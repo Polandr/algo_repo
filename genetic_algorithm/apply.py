@@ -1,3 +1,5 @@
+# Генерация текста по заданному шаблону
+
 import json
 
 def getreclist(data, key):

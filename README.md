@@ -30,6 +30,7 @@ To get some extra information read:
 * https://git-scm.com/book/it/v2
 
 
-# Project developers:
+Project developers:
+-------------------
 * Николай Михайлович Ершов (nickme68)
 * Андрей Сергеевич Полеводов (Polandr)

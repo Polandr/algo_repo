@@ -31,6 +31,6 @@ To get some extra information read:
 
 
 Project developers:
-===================
+-------------------
 * Николай Михайлович Ершов (nickme68)
 * Андрей Сергеевич Полеводов (Polandr)

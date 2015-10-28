@@ -28,3 +28,8 @@ Despite all of these commands you can use comfortable GUI of GitHub.
 To get some extra information read:
 * man git
 * https://git-scm.com/book/it/v2
+
+
+# Project developers:
+* Николай Михайлович Ершов (nickme68)
+* Андрей Сергеевич Полеводов (Polandr)

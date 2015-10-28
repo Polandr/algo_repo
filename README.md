@@ -3,9 +3,9 @@
 
 To clone repository to your local machine type:
 
->git clone https://github.com/Polandr/algo_repo ($filename)
+>git clone https://github.com/Polandr/algo_repo <filename>
 
-where filename is the file where to clone repository
+where <<filename> is the file where to clone repository
 
 To save your local changes in remote repository type:
 

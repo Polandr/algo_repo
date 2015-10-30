@@ -1,37 +1,37 @@
-# -*- coding: Windows-1251 -*-
+# -*- coding: UTF-8 -*-
 
-# Предобработка заготовок шаблонов
-# - на входе - папка elements и файл slots.txt
-# - на выходе - папка elements2 и файл system.js
+# РџСЂРµРґРѕР±СЂР°Р±РѕС‚РєР° Р·Р°РіРѕС‚РѕРІРѕРє С€Р°Р±Р»РѕРЅРѕРІ
+# - РЅР° РІС…РѕРґРµ - РїР°РїРєР° elements Рё С„Р°Р№Р» slots.txt
+# - РЅР° РІС‹С…РѕРґРµ - РїР°РїРєР° elements2 Рё С„Р°Р№Р» system.js
 
 import sys, json
 
-# обертка для поля contains
+# РѕР±РµСЂС‚РєР° РґР»СЏ РїРѕР»СЏ contains
 def contains(t):
   if t.has_key("contains"):
     return t["contains"]
   return []
 
-# доступен ли шаблон t для использования в текущем слоте
+# РґРѕСЃС‚СѓРїРµРЅ Р»Рё С€Р°Р±Р»РѕРЅ t РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РІ С‚РµРєСѓС‰РµРј СЃР»РѕС‚Рµ
 def available(t, config):
   if not t.has_key("depends"):
-    return True # нет ограничений -> доступен
+    return True # РЅРµС‚ РѕРіСЂР°РЅРёС‡РµРЅРёР№ -> РґРѕСЃС‚СѓРїРµРЅ
   for c in t["depends"].keys():
     if c not in config.keys():
-      return False # отсутствует слот -> недоступен
+      return False # РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ СЃР»РѕС‚ -> РЅРµРґРѕСЃС‚СѓРїРµРЅ
     if config[c] not in t["depends"][c]:
-      return False # нарушено одно из условий -> недоступен
-  return True # все условия выполнены -> доступен
+      return False # РЅР°СЂСѓС€РµРЅРѕ РѕРґРЅРѕ РёР· СѓСЃР»РѕРІРёР№ -> РЅРµРґРѕСЃС‚СѓРїРµРЅ
+  return True # РІСЃРµ СѓСЃР»РѕРІРёСЏ РІС‹РїРѕР»РЅРµРЅС‹ -> РґРѕСЃС‚СѓРїРµРЅ
 
-# диалог с пользователем и подготовка конфигурационного файла  
+# РґРёР°Р»РѕРі СЃ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј Рё РїРѕРґРіРѕС‚РѕРІРєР° РєРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅРѕРіРѕ С„Р°Р№Р»Р°  
 def make_config(elements):
-  config = {} # выбранная пользователем конфигурация
-  params = {} # значения параметров в выбранных пользователем шаблонах
-  slots = ["program"] # список слотов, подлежащих детализации
-  for e in elements: # перебираем все слоты в system.js 
+  config = {} # РІС‹Р±СЂР°РЅРЅР°СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ
+  params = {} # Р·РЅР°С‡РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ РІ РІС‹Р±СЂР°РЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј С€Р°Р±Р»РѕРЅР°С…
+  slots = ["program"] # СЃРїРёСЃРѕРє СЃР»РѕС‚РѕРІ, РїРѕРґР»РµР¶Р°С‰РёС… РґРµС‚Р°Р»РёР·Р°С†РёРё
+  for e in elements: # РїРµСЂРµР±РёСЂР°РµРј РІСЃРµ СЃР»РѕС‚С‹ РІ system.js 
     slot, text, templates = e[0], e[1], e[2:]
-    if slot in slots: # слот подлежит детализации?
-      # выводим список доступных шаблонов для данного слота
+    if slot in slots: # СЃР»РѕС‚ РїРѕРґР»РµР¶РёС‚ РґРµС‚Р°Р»РёР·Р°С†РёРё?
+      # РІС‹РІРѕРґРёРј СЃРїРёСЃРѕРє РґРѕСЃС‚СѓРїРЅС‹С… С€Р°Р±Р»РѕРЅРѕРІ РґР»СЏ РґР°РЅРЅРѕРіРѕ СЃР»РѕС‚Р°
       print text+":"
       ind, k = [], 0
       for i in range(len(templates)):
@@ -39,14 +39,14 @@ def make_config(elements):
           print k+1, templates[i]["title"]
           ind.append(i)
           k += 1
-      a = raw_input(">") # выбор пользователя
+      a = raw_input(">") # РІС‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
       if a!="": 
         a = int(a)-1
       else: 
-        a = 0 # по умолчанию (нажат только Enter) берем первый вариант
-      slots += contains(templates[ind[a]]) # обновляем список слотов 
-      config[slot] = templates[ind[a]]["id"] # запоминаем выбор пользователя
-      # настройка параметров 
+        a = 0 # РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ (РЅР°Р¶Р°С‚ С‚РѕР»СЊРєРѕ Enter) Р±РµСЂРµРј РїРµСЂРІС‹Р№ РІР°СЂРёР°РЅС‚
+      slots += contains(templates[ind[a]]) # РѕР±РЅРѕРІР»СЏРµРј СЃРїРёСЃРѕРє СЃР»РѕС‚РѕРІ 
+      config[slot] = templates[ind[a]]["id"] # Р·Р°РїРѕРјРёРЅР°РµРј РІС‹Р±РѕСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
+      # РЅР°СЃС‚СЂРѕР№РєР° РїР°СЂР°РјРµС‚СЂРѕРІ 
       if templates[ind[a]].has_key("params"):
         for p in templates[ind[a]]["params"]:
           print "  ", p[3], "("+p[0]+")",
@@ -54,19 +54,19 @@ def make_config(elements):
           if v!="": 
             params[p[1]] = v
           else:
-            params[p[1]] = p[2] # значение по умолчанию
+            params[p[1]] = p[2] # Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
       print
   return config, params
 
-# головная функция
+# РіРѕР»РѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ
 def main():
   #sdata = "".join(open(sys.argv[1],"r").readlines())
-  sdata = open(sys.argv[1],"r").read()
-  data = json.loads(sdata.decode("windows-1251"))
+  sdata = open("system.js","r").read()
+  data = json.loads(sdata) #.decode("windows-1251"))
   config, params = make_config(data)
 
   f = open("user.js","w")
-  print >> f, json.dumps([config, params], indent=4)
+  print >> f, json.dumps([config, params], ensure_ascii=False, indent=4)
   f.close()
   
 main()

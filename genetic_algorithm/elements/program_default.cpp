@@ -1,13 +1,13 @@
 [title]
-Начальный шаблон
+РќР°С‡Р°Р»СЊРЅС‹Р№ С€Р°Р±Р»РѕРЅ
 
 [include]
 "stdafx.h"
 
 [params]
-int task_dim 10 Размерность задачи
-int pop_size 100 Размер популяции
-int generations 100 Число итераций
+int task_dim 10 Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+int pop_size 100 Р Р°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё
+int generations 100 Р§РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№
 
 [code]
 //:GLOBAL+
@@ -36,8 +36,8 @@ struct parameters
 
 struct population
 {
-	int n; // размерность задачи
-	int m; // размер популяции
+	int n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё
 	$gtype$* data; 
 	double* fitness;
 //:ATYPE+

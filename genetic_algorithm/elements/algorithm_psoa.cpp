@@ -1,26 +1,26 @@
 [title]
-Метод роя частиц
+РњРµС‚РѕРґ СЂРѕСЏ С‡Р°СЃС‚РёС†
 
 [details]
-Стандартная версия метода роя частиц
+РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ РІРµСЂСЃРёСЏ РјРµС‚РѕРґР° СЂРѕСЏ С‡Р°СЃС‚РёС†
 
 [params]
-double eta 0.9 коэффициент сопротивления среды
-double v0 1.0 максимальное начальное значение скорости частиц
-double tau 1.0 шаг времени
+double eta 0.9 РєРѕСЌС„С„РёС†РёРµРЅС‚ СЃРѕРїСЂРѕС‚РёРІР»РµРЅРёСЏ СЃСЂРµРґС‹
+double v0 1.0 РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ РЅР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃРєРѕСЂРѕСЃС‚Рё С‡Р°СЃС‚РёС†
+double tau 1.0 С€Р°Рі РІСЂРµРјРµРЅРё
 
 [depends]
 encoding=real
 
 [types]
-double p array лучшая точка трактории частицы
-double v array вектор скорости частицы
+double p array Р»СѓС‡С€Р°СЏ С‚РѕС‡РєР° С‚СЂР°РєС‚РѕСЂРёРё С‡Р°СЃС‚РёС†С‹
+double v array РІРµРєС‚РѕСЂ СЃРєРѕСЂРѕСЃС‚Рё С‡Р°СЃС‚РёС†С‹
 
 [code]
 void update_global(population& P, double* g)
 {
-	int n = P.n; // размерность задачи
-	int m = P.m; // размер популяции 
+	int n = P.n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m = P.m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё 
 	int best = 0;
 	for( int i=0; i<m; i++ )
 		if( better(P.fitness[i], P.fitness[best]) )
@@ -33,8 +33,8 @@ void update_global(population& P, double* g)
 
 void init(population& P, parameters& par)
 {
-	int n = P.n; // размерность задачи
-	int m = P.m; // размер популяции 
+	int n = P.n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m = P.m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё 
 	for( int i=0; i<m; i++ )
 	{
 		randrealfill(P.data+i*n, n, par.min_value, par.max_value);

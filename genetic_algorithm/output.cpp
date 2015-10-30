@@ -5,54 +5,50 @@ using namespace std;
 
 struct parameters
 {
-  	int task_dim; // Размерность задачи
-  	int pop_size; // Размер популяции
-  	int generations; // Число итераций
-  	int min_value; // минимум
-  	int max_value; // максимум
-  	double p_cross; // вероятность выполнения скрещивания в заданной паре
-  	double p_mut; // вероятность мутации заданного решения
-  	double p_mutation_rate; // Вероятность мутации отдельного гена 
-  	int mutate_variance; // Максимальное изменение одного гена
-  	bool printpopulation; // печать всей популяции
-  	bool printbestsolution; // печать лучшего решения
-  	bool printstatistics; // печать среднего и лучшего значений целевой функции
+  	int task_dim; // Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+  	int pop_size; // Р Р°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё
+  	int generations; // Р§РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№
+  	double p_cross; // РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРµС‰РёРІР°РЅРёСЏ РІ Р·Р°РґР°РЅРЅРѕР№ РїР°СЂРµ
+  	double p_swap; // РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РѕР±РјРµРЅР° Р·РЅР°С‡РµРЅРёСЏРјРё РІС‹Р±СЂР°РЅРЅРѕР№ РїР°СЂС‹ РіРµРЅРѕРІ
+  	double p_mut; // РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РјСѓС‚Р°С†РёРё Р·Р°РґР°РЅРЅРѕРіРѕ СЂРµС€РµРЅРёСЏ
+  	double p_mutation_rate; // Р’РµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РјСѓС‚Р°С†РёРё РѕРґРЅРѕРіРѕ РіРµРЅР°
+  	bool printpopulation; // РїРµС‡Р°С‚СЊ РІСЃРµР№ РїРѕРїСѓР»СЏС†РёРё
+  	bool printbestsolution; // РїРµС‡Р°С‚СЊ Р»СѓС‡С€РµРіРѕ СЂРµС€РµРЅРёСЏ
+  	bool printstatistics; // РїРµС‡Р°С‚СЊ СЃСЂРµРґРЅРµРіРѕ Рё Р»СѓС‡С€РµРіРѕ Р·РЅР°С‡РµРЅРёР№ С†РµР»РµРІРѕР№ С„СѓРЅРєС†РёРё
   	parameters()
   	{
-    		task_dim = 5; 
-    		pop_size = 10; 
-    		generations = 1000; 
-    		min_value = 0; 
-    		max_value = 10; 
+    		task_dim = 10; 
+    		pop_size = 33; 
+    		generations = 199; 
     		p_cross = 0.5; 
+    		p_swap = 0.2; 
     		p_mut = 0.1; 
     		p_mutation_rate = 0.01; 
-    		mutate_variance = 1; 
     		printpopulation = 0; 
-    		printbestsolution = 1; 
+    		printbestsolution = 0; 
     		printstatistics = 1; 
   	}
 };
 
-// Поиск минимума целевой функции
+// РџРѕРёСЃРє РјР°РєСЃРёРјСѓРјР° С†РµР»РµРІРѕР№ С„СѓРЅРєС†РёРё
 bool better(double a, double b)
 {
-	return a<b;
+	return a>b;
 }
 
-// Кодирование решений целочисленными последовательностями
+// РљРѕРґРёСЂРѕРІР°РЅРёРµ СЂРµС€РµРЅРёР№ РґРІРѕРёС‡РЅС‹РјРё РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЏРјРё
 double target(int* x, int n)
 {
 	double sum = 0;
 	for( int i=0; i<n; i++ )
-		sum += x[i]*x[i];
+		sum += x[i];
 	return sum;
 }
 
 struct population
 {
-	int n; // размерность задачи
-	int m; // размер популяции
+	int n; // РЎР‚Р В°Р В·Р СР ВµРЎР‚Р Р…Р С•РЎРѓРЎвЂљРЎРЉ Р В·Р В°Р Т‘Р В°РЎвЂЎР С‘
+	int m; // РЎР‚Р В°Р В·Р СР ВµРЎР‚ Р С—Р С•Р С—РЎС“Р В»РЎРЏРЎвЂ Р С‘Р С‘
 	int* data; 
 	double* fitness;
 	population(int n_, int m_)
@@ -69,24 +65,23 @@ struct population
   	}
 };
 
-int randint(int a, int b)
+int randbool()
 {
-	return a + rand()%(b-a);
+	return rand()%2;
 }
 
-void randintfill(int* x, int n, int min_value, int max_value)
+void randboolfill(int* x, int n)
 {
  	for( int i=0; i<n; i++ )
-		x[i] = randint(min_value,max_value);
-}                      
-
+		x[i] = randbool();
+}
 void init(population& P, parameters& par)
 {
 	int n = par.task_dim;
 	int m = par.pop_size;
 	for( int i=0; i<m; i++ )
 	{
-		randintfill(P.data+i*n, n, par.min_value, par.max_value);
+		randboolfill(P.data+i*n, n);
 		P.fitness[i] = target(P.data+i*n, n);
 	}
 }
@@ -101,7 +96,7 @@ void copy(population& P, int i, int j)
   	P.fitness[i] = P.fitness[j];
 }
 
-// Турнирная схема отбора
+// РўСѓСЂРЅРёСЂРЅР°СЏ СЃС…РµРјР° РѕС‚Р±РѕСЂР°
 void select(population& P, int x, int y, parameters& par)
 { 
 	if( better(P.fitness[x], P.fitness[y]) )
@@ -110,6 +105,10 @@ void select(population& P, int x, int y, parameters& par)
 		copy(P, x, y);
 }
 
+int randint(int a, int b)
+{
+	return a + rand()%(b-a);
+}
 
 void shuffle(population& P)
 {
@@ -126,7 +125,7 @@ void shuffle(population& P)
 	}
 }	
 
-// Турнирная схема отбора
+// РўСѓСЂРЅРёСЂРЅР°СЏ СЃС…РµРјР° РѕС‚Р±РѕСЂР°
 void select_population(population& P, parameters& par)
 {                                          
 	int n = P.n;
@@ -136,26 +135,24 @@ void select_population(population& P, parameters& par)
  		select(P, 2*i, 2*i+1, par);
 }
 
-
-// Двухточечное скрещивание
-void crossover(population& P, int x, int y, parameters& par)
-{
-	int n = P.n;
-	int j1 = randint(1, n-1);
-	int j2 = randint(j1+1, n);
-	for( int k=j1; k<j2; k++ )
-		swap(P.data[x*n+k], P.data[y*n+k]);
-	P.fitness[x] = target(P.data+x*n,n);
-	P.fitness[y] = target(P.data+y*n,n);
-}
-
-
 double randreal(double a, double b)
 {
 	return a+(b-a)*(double(rand())/RAND_MAX);
 }
 
-// Схема скрещивания на основе перемешивания популяции
+void crossover(population& P, int x, int y, parameters& par)
+{
+	int n = P.n;
+	for( int k=0; k<n; k++ )
+		if( randreal(0,1) < par.p_swap )
+			swap(P.data[x*n+k], P.data[y*n+k]);
+	P.fitness[x] = target(P.data+x*n,n);
+	P.fitness[y] = target(P.data+y*n,n);
+}
+
+
+
+// РЎС…РµРјР° СЃРєСЂРµС‰РёРІР°РЅРёСЏ РЅР° РѕСЃРЅРѕРІРµ РїРµСЂРµРјРµС€РёРІР°РЅРёСЏ РїРѕРїСѓР»СЏС†РёРё
 void crossover_population(population& P, parameters& par)
 {
 	int m = par.pop_size;
@@ -168,27 +165,19 @@ void crossover_population(population& P, parameters& par)
 }
 
 
-
-// Замена каждого числа заданной последовательности случайным соседним числом. 
-// Выполняется с вероятностью p_mutate_rate.
+// РЎР»СѓС‡Р°Р№РЅР°СЏ РёРЅРІРµСЂСЃРёСЏ РєР°Р¶РґРѕРіРѕ Р±РёС‚Р° Р·Р°РґР°РЅРЅРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё 
+// СЃ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ p_mutate_rate.
 void mutate(population& P, int i, parameters& par)
 {
 	int n = P.n;
 	for( int k=0; k<n; k++ )
-		if( randreal(0,1) < par.p_mutation_rate )
-		{
-			int t = P.data[i*n+k] + randint(-par.mutate_variance, par.mutate_variance+1);
-			if( t < par.min_value ) 
-				t = par.min_value;
-			if( t > par.max_value )
-				t = par.max_value;
-			P.data[i*n+k] = t;
-		}
+		if( randreal(0,1) < p.p_mutation_rate )
+			P.data[i*n+k] = !P.dat[i*n+k];
  	P.fitness[i] = target(P.data+i*n, n);
 }
 
 
-// Стандартная схема мутации
+// РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ СЃС…РµРјР° РјСѓС‚Р°С†РёРё
 void mutate_population(population& P, parameters& par)
 {
 	int n = P.n;
@@ -198,7 +187,7 @@ void mutate_population(population& P, parameters& par)
 			mutate(P, i, par);
 }
 
-// Печать данных о текущей популяции: все решения, лучшее решение, статистика
+// РџРµС‡Р°С‚СЊ РґР°РЅРЅС‹С… Рѕ С‚РµРєСѓС‰РµР№ РїРѕРїСѓР»СЏС†РёРё: РІСЃРµ СЂРµС€РµРЅРёСЏ, Р»СѓС‡С€РµРµ СЂРµС€РµРЅРёРµ, СЃС‚Р°С‚РёСЃС‚РёРєР°
 void print_population(population& P, parameters& par)
 {
 	int n = P.n;
@@ -230,7 +219,7 @@ void print_population(population& P, parameters& par)
 		cout << P.fitness[best] << " " << average_target << endl;
 }
 
-// // Стандартная версия генетического алгоритма
+// // РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ РІРµСЂСЃРёСЏ РіРµРЅРµС‚РёС‡РµСЃРєРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјР°
 void run_ga(parameters& par)
 {
 	population P(par.task_dim, par.pop_size);

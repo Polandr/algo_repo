@@ -3,95 +3,81 @@
         {
             "body": [
                 {
-                    "val": "5", 
+                    "val": "10", 
                     "type": "int", 
                     "name": "task_dim", 
                     "key": "PARAMETER", 
-                    "details": "Размерность задачи"
+                    "details": "Р Р°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё"
                 }, 
                 {
-                    "val": "10", 
+                    "val": "33", 
                     "type": "int", 
                     "name": "pop_size", 
                     "key": "PARAMETER", 
-                    "details": "Размер популяции"
+                    "details": "Р Р°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё"
                 }, 
                 {
-                    "val": "1000", 
+                    "val": "199", 
                     "type": "int", 
                     "name": "generations", 
                     "key": "PARAMETER", 
-                    "details": "Число итераций"
+                    "details": "Р§РёСЃР»Рѕ РёС‚РµСЂР°С†РёР№"
                 }, 
                 {
                     "header": "\"stdafx.h\"", 
                     "key": "INCLUDE"
                 }, 
                 {
-                    "val": "0", 
-                    "type": "int", 
-                    "name": "min_value", 
-                    "key": "PARAMETER", 
-                    "details": "минимум"
-                }, 
-                {
-                    "val": "10", 
-                    "type": "int", 
-                    "name": "max_value", 
-                    "key": "PARAMETER", 
-                    "details": "максимум"
-                }, 
-                {
-                    "key": "ENCODING_INT"
+                    "key": "ENCODING_BOOL"
                 }, 
                 {
                     "val": "0.5", 
                     "type": "double", 
                     "name": "p_cross", 
                     "key": "PARAMETER", 
-                    "details": "вероятность выполнения скрещивания в заданной паре"
+                    "details": "РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРµС‰РёРІР°РЅРёСЏ РІ Р·Р°РґР°РЅРЅРѕР№ РїР°СЂРµ"
+                }, 
+                {
+                    "val": "0.2", 
+                    "type": "double", 
+                    "name": "p_swap", 
+                    "key": "PARAMETER", 
+                    "details": "РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РѕР±РјРµРЅР° Р·РЅР°С‡РµРЅРёСЏРјРё РІС‹Р±СЂР°РЅРЅРѕР№ РїР°СЂС‹ РіРµРЅРѕРІ"
                 }, 
                 {
                     "val": "0.1", 
                     "type": "double", 
                     "name": "p_mut", 
                     "key": "PARAMETER", 
-                    "details": "вероятность мутации заданного решения"
+                    "details": "РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РјСѓС‚Р°С†РёРё Р·Р°РґР°РЅРЅРѕРіРѕ СЂРµС€РµРЅРёСЏ"
                 }, 
                 {
                     "val": "0.01", 
                     "type": "double", 
                     "name": "p_mutation_rate", 
                     "key": "PARAMETER", 
-                    "details": "Вероятность мутации отдельного гена "
-                }, 
-                {
-                    "val": "1", 
-                    "type": "int", 
-                    "name": "mutate_variance", 
-                    "key": "PARAMETER", 
-                    "details": "Максимальное изменение одного гена"
+                    "details": "Р’РµСЂРѕСЏС‚РЅРѕСЃС‚СЊ РјСѓС‚Р°С†РёРё РѕРґРЅРѕРіРѕ РіРµРЅР°"
                 }, 
                 {
                     "val": "0", 
                     "type": "bool", 
                     "name": "printpopulation", 
                     "key": "PARAMETER", 
-                    "details": "печать всей популяции"
+                    "details": "РїРµС‡Р°С‚СЊ РІСЃРµР№ РїРѕРїСѓР»СЏС†РёРё"
                 }, 
                 {
-                    "val": "1", 
+                    "val": "0", 
                     "type": "bool", 
                     "name": "printbestsolution", 
                     "key": "PARAMETER", 
-                    "details": "печать лучшего решения"
+                    "details": "РїРµС‡Р°С‚СЊ Р»СѓС‡С€РµРіРѕ СЂРµС€РµРЅРёСЏ"
                 }, 
                 {
                     "val": "1", 
                     "type": "bool", 
                     "name": "printstatistics", 
                     "key": "PARAMETER", 
-                    "details": "печать среднего и лучшего значений целевой функции"
+                    "details": "РїРµС‡Р°С‚СЊ СЃСЂРµРґРЅРµРіРѕ Рё Р»СѓС‡С€РµРіРѕ Р·РЅР°С‡РµРЅРёР№ С†РµР»РµРІРѕР№ С„СѓРЅРєС†РёРё"
                 }, 
                 {
                     "header": "<iostream>", 
@@ -99,29 +85,29 @@
                 }
             ], 
             "program_details": "", 
-            "encoding": "int", 
+            "encoding": "bool", 
             "getalphabeta": "", 
-            "better_details": "// Поиск минимума целевой функции", 
+            "better_details": "// РџРѕРёСЃРє РјР°РєСЃРёРјСѓРјР° С†РµР»РµРІРѕР№ С„СѓРЅРєС†РёРё", 
             "crossoverpopulation": "shuffling", 
-            "crossover": "doublepoint", 
-            "selectpopulation_details": "// Турнирная схема отбора", 
+            "crossover": "uniform", 
+            "selectpopulation_details": "// РўСѓСЂРЅРёСЂРЅР°СЏ СЃС…РµРјР° РѕС‚Р±РѕСЂР°", 
             "select": "tournement", 
-            "select_details": "// Турнирная схема отбора", 
+            "select_details": "// РўСѓСЂРЅРёСЂРЅР°СЏ СЃС…РµРјР° РѕС‚Р±РѕСЂР°", 
             "selectpopulation": "tournament", 
-            "crossoverpopulation_details": "// Схема скрещивания на основе перемешивания популяции", 
-            "better": "min", 
+            "crossoverpopulation_details": "// РЎС…РµРјР° СЃРєСЂРµС‰РёРІР°РЅРёСЏ РЅР° РѕСЃРЅРѕРІРµ РїРµСЂРµРјРµС€РёРІР°РЅРёСЏ РїРѕРїСѓР»СЏС†РёРё", 
+            "better": "max", 
             "program": "default", 
-            "mutate_details": "// Замена каждого числа заданной последовательности случайным соседним числом. \n// Выполняется с вероятностью p_mutate_rate.", 
-            "mutate": "intlocal", 
+            "mutate_details": "// РЎР»СѓС‡Р°Р№РЅР°СЏ РёРЅРІРµСЂСЃРёСЏ РєР°Р¶РґРѕРіРѕ Р±РёС‚Р° Р·Р°РґР°РЅРЅРѕР№ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё \n// СЃ РІРµСЂРѕСЏС‚РЅРѕСЃС‚СЊСЋ p_mutate_rate.", 
+            "mutate": "bool", 
             "mutatepopulation": "default", 
-            "encoding_details": "// Кодирование решений целочисленными последовательностями", 
+            "encoding_details": "// РљРѕРґРёСЂРѕРІР°РЅРёРµ СЂРµС€РµРЅРёР№ РґРІРѕРёС‡РЅС‹РјРё РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚СЏРјРё", 
             "key": "GLOBAL", 
             "printpopulation": "default", 
-            "crossover_details": "// Двухточечное скрещивание", 
+            "crossover_details": "// Р Р°РІРЅРѕРјРµСЂРЅРѕРµ СЃРєСЂРµС‰РёРІР°РЅРёРµ", 
             "algorithm": "ga", 
-            "mutatepopulation_details": "// Стандартная схема мутации", 
-            "printpopulation_details": "// Печать данных о текущей популяции: все решения, лучшее решение, статистика", 
-            "algorithm_details": "// Стандартная версия генетического алгоритма", 
+            "mutatepopulation_details": "// РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ СЃС…РµРјР° РјСѓС‚Р°С†РёРё", 
+            "printpopulation_details": "// РџРµС‡Р°С‚СЊ РґР°РЅРЅС‹С… Рѕ С‚РµРєСѓС‰РµР№ РїРѕРїСѓР»СЏС†РёРё: РІСЃРµ СЂРµС€РµРЅРёСЏ, Р»СѓС‡С€РµРµ СЂРµС€РµРЅРёРµ, СЃС‚Р°С‚РёСЃС‚РёРєР°", 
+            "algorithm_details": "// РЎС‚Р°РЅРґР°СЂС‚РЅР°СЏ РІРµСЂСЃРёСЏ РіРµРЅРµС‚РёС‡РµСЃРєРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјР°", 
             "gtype": "int"
         }
     ]

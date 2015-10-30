@@ -1,5 +1,3 @@
-# Генерация текста по заданному шаблону
-
 import json
 
 def getreclist(data, key):
@@ -72,11 +70,11 @@ def apply(text, data, vars={}, includes=[]):
   
 def main():
   text = loadtemplate("elements2\\program_default.cpp")
-  data = json.loads(open("config.js","r").read().decode("windows-1251"))
+  data = json.loads(open("config.js","r").read()) #.decode("windows-1251"))
   S = apply(text, data, {}, [])
 
   f = open("output.cpp","w")
-  print >> f, ("".join(S)).encode("windows-1251")
+  print >> f, ("".join(S)).encode("utf-8") #.encode("windows-1251")
   f.close()
   
 main()

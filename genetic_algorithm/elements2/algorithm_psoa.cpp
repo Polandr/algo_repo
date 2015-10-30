@@ -1,7 +1,7 @@
 void update_global(population& P, double* g)
 {
-	int n = P.n; // размерность задачи
-	int m = P.m; // размер популяции 
+	int n = P.n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m = P.m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё 
 	int best = 0;
 	for( int i=0; i<m; i++ )
 		if( better(P.fitness[i], P.fitness[best]) )
@@ -14,8 +14,8 @@ void update_global(population& P, double* g)
 
 void init(population& P, parameters& par)
 {
-	int n = P.n; // размерность задачи
-	int m = P.m; // размер популяции 
+	int n = P.n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m = P.m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё 
 	for( int i=0; i<m; i++ )
 	{
 		randrealfill(P.data+i*n, n, par.min_value, par.max_value);

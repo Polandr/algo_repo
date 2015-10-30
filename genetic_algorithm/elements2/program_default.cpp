@@ -24,8 +24,8 @@ struct parameters
 
 struct population
 {
-	int n; // размерность задачи
-	int m; // размер популяции
+	int n; // СЂР°Р·РјРµСЂРЅРѕСЃС‚СЊ Р·Р°РґР°С‡Рё
+	int m; // СЂР°Р·РјРµСЂ РїРѕРїСѓР»СЏС†РёРё
 	$gtype$* data; 
 	double* fitness;
 //:ATYPE+

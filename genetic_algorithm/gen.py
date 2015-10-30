@@ -1,35 +1,35 @@
-# -*- coding: Windows-1251 -*-
+# -*- coding: UTF-8 -*-
 
-# Ïîäãîòîâêà äàííûõ äëÿ íåïîñðåäñòâåííîé ãåíåðàöèè êîäà
+# ÐŸÐ¾Ð´Ð³Ð¾Ñ‚Ð¾Ð²ÐºÐ° Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð´Ð»Ñ Ð½ÐµÐ¿Ð¾ÑÑ€ÐµÐ´ÑÑ‚Ð²ÐµÐ½Ð½Ð¾Ð¹ Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ð¸ ÐºÐ¾Ð´Ð°
 
 import json
 
-# îáåðòêà äëÿ ïîèñêà çíà÷åíèÿ ïî êëþ÷ó
+# Ð¾Ð±ÐµÑ€Ñ‚ÐºÐ° Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¿Ð¾ ÐºÐ»ÑŽÑ‡Ñƒ
 def get_val(config, key):
   if config.has_key(key):
     return config[key]
   return ""   
 
-# ïîäãîòîâêà äàííûõ äëÿ ãåíåðàöèè êîäà
+# Ð¿Ð¾Ð´Ð³Ð¾Ñ‚Ð¾Ð²ÐºÐ° Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð´Ð»Ñ Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ð¸ ÐºÐ¾Ð´Ð°
 def make_config(system, user):
-  vars = {} # ñïèñîê ïåðåìåííûõ â ñåêöèè GLOBAL
-  body = [] # ñïèñîê ñåêöèé (PARAMETER, INCLUDE, SWITCH è ò.ä.
+  vars = {} # ÑÐ¿Ð¸ÑÐ¾Ðº Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… Ð² ÑÐµÐºÑ†Ð¸Ð¸ GLOBAL
+  body = [] # ÑÐ¿Ð¸ÑÐ¾Ðº ÑÐµÐºÑ†Ð¸Ð¹ (PARAMETER, INCLUDE, SWITCH Ð¸ Ñ‚.Ð´.
   
-  slots = user[0] # âûáðàííàÿ ïîëüçîâàòåëåì êîíôèãóðàöèÿ àëãîðèòìà
-  params = user[1] # ïàðàìåòðû âñåõ âûáðàííûõ ïîëüçîâàòåëåì øàáëîíîâ
+  slots = user[0] # Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ð°Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ñ Ð°Ð»Ð³Ð¾Ñ€Ð¸Ñ‚Ð¼Ð°
+  params = user[1] # Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð²ÑÐµÑ… Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ñ… Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð²
 
-  # öèêë ïî âñåì ñëîòàì â system.js
+  # Ñ†Ð¸ÐºÐ» Ð¿Ð¾ Ð²ÑÐµÐ¼ ÑÐ»Ð¾Ñ‚Ð°Ð¼ Ð² system.js
   for e in system:
     slot = e[0]
     template = get_val(slots, slot)
     vars[slot] = template
-    # öèêë ïî âñåì øàáëîíàì òåêóùåãî ñëîòà
+    # Ñ†Ð¸ÐºÐ» Ð¿Ð¾ Ð²ÑÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð°Ð¼ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ ÑÐ»Ð¾Ñ‚Ð°
     for c in e[2:]:
       if c["id"]==template:
-        # åñëè ïîëüçîâàòåëåì áûëà âûáðàíà äàííàÿ êîìáèíàöèÿ ñëîò+øàáëîí...
+        # ÐµÑÐ»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¼ Ð±Ñ‹Ð»Ð° Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð° Ð´Ð°Ð½Ð½Ð°Ñ ÐºÐ¾Ð¼Ð±Ð¸Ð½Ð°Ñ†Ð¸Ñ ÑÐ»Ð¾Ñ‚+ÑˆÐ°Ð±Ð»Ð¾Ð½...
         vars[slot+"_details"] = get_val(c,"details") 
         if c.has_key("params"): 
-          # îáðàáîòêà ïàðàìåòðîâ øàáëîíà 
+          # Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° 
           for p in c["params"]:
             d = {"key":"PARAMETER"}
             d["type"] = p[0]
@@ -38,7 +38,7 @@ def make_config(system, user):
             d["details"] = p[3]
             body.append(d)       
         if c.has_key("types"): 
-          # îðàáîòêà äîïîëíèòåëüíûõ òèïîâ (êîäèðîâàíèå ïîïóëÿöèè)
+          # Ð¾Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ñ‚Ð¸Ð¿Ð¾Ð² (ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ð¿ÑƒÐ»ÑÑ†Ð¸Ð¸)
           for t in c["types"]:
             d = {"key":""}
             if t[2] == "array":
@@ -50,12 +50,12 @@ def make_config(system, user):
             d["details"] = t[3]
             body.append(d)       
         if c.has_key("include"):
-          # îáðàáîòêà ïîäêëþ÷àåìûõ çàãîëîâî÷íûõ ôàéëîâ
+          # Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð°ÐµÐ¼Ñ‹Ñ… Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ñ‡Ð½Ñ‹Ñ… Ñ„Ð°Ð¹Ð»Ð¾Ð²
           for i in c["include"]:
             d = {"key":"INCLUDE", "header":i} 
             body.append(d)
         if c.has_key("vars"):
-          # îáðàáîòêà äîïîëíèòåëüíûõ ïåðåìåííûõ
+          # Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð´Ð¾Ð¿Ð¾Ð»Ð½Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ…
           for v in c["vars"].keys():
             vars[v] = c["vars"][v]
         if c.has_key("switches"):
@@ -66,13 +66,13 @@ def make_config(system, user):
   return {"body": [ vars ] }
                   
 def main():
-  system = json.loads(open("system.js","r").read().decode("windows-1251"))
-  user = json.loads(open("user.js","r").read().decode("windows-1251"))
+  system = json.loads(open("system.js","r").read()) #.decode("windows-1251"))
+  user = json.loads(open("user.js","r").read()) #.decode("windows-1251"))
 
   config = make_config(system, user)
 
   f = open("config.js","w")
-  print >> f, json.dumps(config, indent=4, ensure_ascii=False).encode("windows-1251")
+  print >> f, json.dumps(config, ensure_ascii=False, indent=4).encode("utf-8") #.encode("windows-1251")
   f.close()
   
 main()

@@ -1,12 +1,12 @@
 [
     {
-        "mutate": "intlocal", 
+        "mutate": "bool", 
         "algorithm": "ga", 
-        "encoding": "int", 
+        "encoding": "bool", 
         "crossoverpopulation": "shuffling", 
         "selectpopulation": "tournament", 
-        "crossover": "doublepoint", 
-        "better": "min", 
+        "crossover": "uniform", 
+        "better": "max", 
         "program": "default", 
         "printpopulation": "default", 
         "mutatepopulation": "default", 
@@ -14,16 +14,14 @@
     }, 
     {
         "printstatistics": "1", 
+        "p_swap": "0.2", 
         "p_cross": "0.5", 
-        "mutate_variance": "1", 
         "p_mutation_rate": "0.01", 
-        "max_value": "10", 
-        "min_value": "0", 
+        "printbestsolution": "0", 
         "p_mut": "0.1", 
-        "task_dim": "5", 
+        "task_dim": "10", 
         "printpopulation": "0", 
-        "printbestsolution": "1", 
-        "pop_size": "10", 
-        "generations": "1000"
+        "pop_size": "33", 
+        "generations": "199"
     }
 ]

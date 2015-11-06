@@ -1,6 +1,6 @@
 void copy(population& P, int i, int j,population* to=0)
 {
-	if(to=0)to=&P;
+	if(to==0)to=&P;
 	int n = P.n;
 	for( int k=0; k<n; k++ )
 	{

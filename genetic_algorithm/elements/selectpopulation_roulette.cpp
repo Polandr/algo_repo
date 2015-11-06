@@ -21,14 +21,14 @@ void select_population(population& P, parameters& par)
 	int n = P.n;
 	int m = P.m;
 	
-	normFitness=new double[m];//Нормированный массив значений фитнес функций
+	double *normFitness=new double[m];//Нормированный массив значений целевой функции особей
 	//Нормирование
 	{
 		std::copy(P.fitness,P.fitness+n,normFitness);
 		if(better(0,1)){//Если задача минимизации, то поменять знак
-			for(int i=0;i<m;++i)normFitness[i]=-nortmFitness[i];
+			for(int i=0;i<m;++i)normFitness[i]=-normFitness[i];
 		}
-		double minFitness=std::min(normFitness,normFitness+m);
+		double minFitness=*std::min_element(normFitness,normFitness+m);
 		double sum=0;
 		for(int i=0;i<m;++i){
 			normFitness[i]-=minFitness;

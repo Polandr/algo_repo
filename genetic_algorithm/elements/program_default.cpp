@@ -55,7 +55,7 @@ struct population
 		init(P.n,P.m);
 		copy(P);
 	}
-	void init()(int n_, int m_)
+	void init(int n_, int m_)
 	{
  		n = n_;
 		m = m_;

@@ -16,7 +16,8 @@ for fn in fnames:
   if fn[0] == "_":
     # модуль общего назначения, простое копирование
     f = open("elements2\\"+fn[1:],"w")
-    print >> f, open("elements\\"+fn).read(),
+    #print >> f, open("elements\\"+fn).read(),
+    f.write(open("elements\\"+fn).read())
     f.close()
   else:
     # шаблон, производим его разбор с помощью функции parse
@@ -30,7 +31,6 @@ sid = {} # slot id (position in Slots)
 for x in open("slots.txt","r"):
   t = x.strip().split(" ")
   slotname, slotinfo = t[0], " ".join(t[1:])
-  #print slotname, slotinfo
   sid[slotname] = len(Slots)
   Slots.append([slotname, slotinfo]) 
 
@@ -42,17 +42,19 @@ for x in templ:
   t["title"] = x["title"]
   t["contains"] = x["slots"]
   for k in ["params", "depends", "include", "details", "vars", "switches", "types"]:
-    if x.has_key(k):
+    #if x.has_key(k):
+    if k in x:
       t[k] = x[k]
   # присоединяем информацию о шаблоне к соответствующему слоту
   Slots[sid[s]].append(t)
   # создаем файл с кодом (без метаинформации)
   f = open("elements2\\"+s+"_"+id+".cpp","w")
-  print >> f, x["code"]
+  #print >> f, x["code"]
+  f.write(x["code"]);
   f.close()
 
 f = open("system.js","w")
-print >> f, json.dumps(Slots, ensure_ascii=False, indent=4)
+f.write(json.dumps(Slots, ensure_ascii=False, indent=4))
 f.close()
 
   

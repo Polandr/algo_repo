@@ -3,6 +3,7 @@
 
 [include]
 "stdafx.h"
+<algorithm>
 
 [params]
 int task_dim 10 Размерность задачи
@@ -48,6 +49,14 @@ struct population
 //:STYPE- 
 	population(int n_, int m_)
 	{
+		init(n_,m_);
+	}
+	population(const population &P){
+		init(P.n,P.m);
+		copy(P);
+	}
+	void init()(int n_, int m_)
+	{
  		n = n_;
 		m = m_;
 		data = new $gtype$[n*m];
@@ -58,6 +67,27 @@ struct population
 //:STYPE+
     		$name$ = new $type$[m];
 //:STYPE-
+	}
+	void copy(const population &P){
+		std::copy(P.data,P.data+n*m,data);
+		std::copy(P.fitness,P.fitness+m,fitness);
+//:ATYPE+
+			std::copy(P.$name$,P.$name$+m,$name$);
+//:ATYPE-
+//:STYPE+
+			std::copy(P.$name$,P.$name$+m,$name$);
+//:STYPE-
+	}
+	
+	population& operator=(const population& P){
+		if(this!=&P){
+			if(P.m!=m || P.n!=n){
+				this->~population();
+				init(P.n,P.m);
+			}
+			copy(P);
+		}
+		return *this;
 	}
   	~population()
   	{

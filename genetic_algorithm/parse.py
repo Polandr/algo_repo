@@ -96,7 +96,7 @@ def parse(fname):
       if key=="types":
         D[key] = make_types(D[key])
       if key=="include":
-	D[key] = make_includes(D[key])
+        D[key] = make_includes(D[key])
       if key=="depends":
         D[key] = make_depends(D[key])
       if key=="vars":

@@ -1,15 +1,16 @@
-void copy(population& P, int i, int j)
+void copy(population& P, int i, int j,population* to=0)
 {
+	if(to=0)to=&P;
 	int n = P.n;
 	for( int k=0; k<n; k++ )
 	{
-		P.data[i*n+k] = P.data[j*n+k];
+		to->data[i*n+k] = P.data[j*n+k];
 //:ATYPE+
-		P.$name$[i*n+k] = P.$name$[j*n+k];
+		to->$name$[i*n+k] = P.$name$[j*n+k];
 //:ATYPE-
 	}
-  	P.fitness[i] = P.fitness[j];
+	to->fitness[i] = P.fitness[j];
 //:STYPE+
-	P.$name$[i] = P.$name$[j];
+	to->$name$[i] = P.$name$[j];
 //:STYPE-
 }

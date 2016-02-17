@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+# Generated files
+genetic_algorithm/system.js
+genetic_algorithm/user.js
+genetic_algorithm/config.js
+genetic_algorithm/output.cpp
+genetic_algorithm/elements2/*.cpp

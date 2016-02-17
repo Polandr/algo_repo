@@ -8,13 +8,13 @@ import sys, json
 
 # обертка для поля contains
 def contains(t):
-  if t.has_key("contains"):
+  if  "contains" in t:
     return t["contains"]
   return []
 
 # доступен ли шаблон t для использования в текущем слоте
 def available(t, config):
-  if not t.has_key("depends"):
+  if not "depends" in t:
     return True # нет ограничений -> доступен
   for c in t["depends"].keys():
     if c not in config.keys():
@@ -32,14 +32,14 @@ def make_config(elements):
     slot, text, templates = e[0], e[1], e[2:]
     if slot in slots: # слот подлежит детализации?
       # выводим список доступных шаблонов для данного слота
-      print text+":"
+      print(text+":");
       ind, k = [], 0
       for i in range(len(templates)):
         if available(templates[i], config):
-          print k+1, templates[i]["title"]
+          print(k+1, templates[i]["title"])
           ind.append(i)
           k += 1
-      a = raw_input(">") # выбор пользователя
+      a = input(">") # выбор пользователя
       if a!="": 
         a = int(a)-1
       else: 
@@ -47,10 +47,10 @@ def make_config(elements):
       slots += contains(templates[ind[a]]) # обновляем список слотов 
       config[slot] = templates[ind[a]]["id"] # запоминаем выбор пользователя
       # настройка параметров 
-      if templates[ind[a]].has_key("params"):
+      if "params" in templates[ind[a]]:
         for p in templates[ind[a]]["params"]:
-          print "  ", p[3], "("+p[0]+")",
-          v = raw_input(": ")
+          print("  ", p[3], "("+p[0]+")")
+          v = input(": ")
           if v!="": 
             params[p[1]] = v
           else:
@@ -61,12 +61,12 @@ def make_config(elements):
 # головная функция
 def main():
   #sdata = "".join(open(sys.argv[1],"r").readlines())
-  sdata = open("system.js","r").read()
-  data = json.loads(sdata) #.decode("windows-1251"))
+  sdata = open("system.js","rb").read()
+  data = json.loads(sdata.decode("utf-8")) #.decode("windows-1251"))
   config, params = make_config(data)
 
   f = open("user.js","w")
-  print >> f, json.dumps([config, params], ensure_ascii=False, indent=4)
+  f.write(json.dumps([config, params], ensure_ascii=False, indent=4))
   f.close()
   
 main()

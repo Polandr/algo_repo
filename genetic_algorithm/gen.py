@@ -6,7 +6,7 @@ import json
 
 # обертка для поиска значения по ключу
 def get_val(config, key):
-  if config.has_key(key):
+  if key in config:
     return config[key]
   return ""   
 
@@ -28,7 +28,7 @@ def make_config(system, user):
       if c["id"]==template:
         # если пользователем была выбрана данная комбинация слот+шаблон...
         vars[slot+"_details"] = get_val(c,"details") 
-        if c.has_key("params"): 
+        if "params" in c: 
           # обработка параметров шаблона 
           for p in c["params"]:
             d = {"key":"PARAMETER"}
@@ -37,7 +37,7 @@ def make_config(system, user):
             d["val"] = params[p[1]]
             d["details"] = p[3]
             body.append(d)       
-        if c.has_key("types"): 
+        if "types" in c: 
           # оработка дополнительных типов (кодирование популяции)
           for t in c["types"]:
             d = {"key":""}
@@ -49,16 +49,16 @@ def make_config(system, user):
             d["name"] = t[1]
             d["details"] = t[3]
             body.append(d)       
-        if c.has_key("include"):
+        if "include" in c:
           # обработка подключаемых заголовочных файлов
           for i in c["include"]:
             d = {"key":"INCLUDE", "header":i} 
             body.append(d)
-        if c.has_key("vars"):
+        if "vars" in c:
           # обработка дополнительных переменных
           for v in c["vars"].keys():
             vars[v] = c["vars"][v]
-        if c.has_key("switches"):
+        if "switches" in c:
           for s in c["switches"]:
             body.append({"key":s}) 
 
@@ -72,7 +72,7 @@ def main():
   config = make_config(system, user)
 
   f = open("config.js","w")
-  print >> f, json.dumps(config, ensure_ascii=False, indent=4).encode("utf-8") #.encode("windows-1251")
+  f.write(json.dumps(config, ensure_ascii=False, indent=4)) #.encode("windows-1251")
   f.close()
   
 main()

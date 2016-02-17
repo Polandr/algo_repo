@@ -2,7 +2,7 @@ import json
 
 def getreclist(data, key):
   L = []
-  if data.has_key("body"):
+  if "body" in data:
     for r in data["body"]:
       if r["key"]==key:
         L.append(r)
@@ -22,7 +22,7 @@ def modify(s, vars):
     if s[pos]=='$':
       p2 = s.find('$',pos+1)
       varname = s[pos+1:p2]
-      if vars.has_key(varname): 
+      if varname in vars: 
         r += vars[varname]
       pos = p2+1
     else:
@@ -34,7 +34,7 @@ def loadtemplate(fname):
   t = open(fname,"r").readlines()
   T = []
   for x in t:
-    T.append(x.decode("windows-1251"))
+    T.append(x)
   return T
   
 def apply(text, data, vars={}, includes=[]):
@@ -45,9 +45,9 @@ def apply(text, data, vars={}, includes=[]):
     if s[:3]=="//:":
       if s[3:7]=="LOAD":
         fname = modify(s[7:].strip(),vars)
-	if fname not in includes:
-	  text[i:] = loadtemplate("elements2\\"+fname) + text[i+1:]
-	  includes.append(fname)
+        if fname not in includes:
+          text[i:] = loadtemplate("elements2\\"+fname) + text[i+1:]
+          includes.append(fname)
         else:
           i += 1 
       else:
@@ -74,7 +74,7 @@ def main():
   S = apply(text, data, {}, [])
 
   f = open("output.cpp","w")
-  print >> f, ("".join(S)).encode("utf-8") #.encode("windows-1251")
+  f.write("".join(S)) #.encode("windows-1251")
   f.close()
   
 main()
